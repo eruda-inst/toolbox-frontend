@@ -1,4 +1,5 @@
 import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 
 const manrope = Manrope({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -14,4 +15,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
 });
 
-export { manrope, plusJakartaSans };
+const tostadaFf = localFont({
+  src: "../public/fonts/tostadaff.ttf",
+  variable: "--font-tostada-ff",
+  display: "swap",
+});
+
+export { manrope, plusJakartaSans, tostadaFf };
