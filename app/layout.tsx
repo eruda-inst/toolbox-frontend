@@ -16,7 +16,7 @@ function RootLayout({
   return (
     <html
       lang="pt-br"
-      className={`${plusJakartaSans.variable} h-full antialiased`}
+      className={`${plusJakartaSans.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
