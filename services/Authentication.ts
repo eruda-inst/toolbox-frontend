@@ -1,34 +1,12 @@
 import axiosClient from "@/libs/axiosClient.lib";
 import { API_ROUTES } from "@/configs/api.config";
 import { tokenStorage } from "@/libs/tokenStorage.lib";
-
-interface LoginCredentials {
-  email: string;
-  senha: string;
-}
-
-interface AuthTokens {
-  access_token: string;
-  refresh_token: string;
-  token_type: string;
-  expires_in: number;
-}
-
-interface User {
-  id: number;
-  nome: string;
-  email: string;
-  ativo: boolean;
-  criado_em: string;
-  atualizado_em: string | null;
-  id_grupo: number;
-}
+import { CredIn, TokenOut } from "@/types/authentication.type";
+import { UserOut } from "@/types/user.type";
 
 class Authentication {
-  public static async login(
-    credentials: LoginCredentials,
-  ): Promise<AuthTokens> {
-    const response = await axiosClient.post<AuthTokens>(
+  public static async login(credentials: CredIn): Promise<TokenOut> {
+    const response = await axiosClient.post<TokenOut>(
       API_ROUTES.authentication.login(),
       credentials,
     );
@@ -47,8 +25,8 @@ class Authentication {
     }
   }
 
-  public static async getCurrentUser(): Promise<User> {
-    const response = await axiosClient.get<User>(
+  public static async getCurrentUser(): Promise<UserOut> {
+    const response = await axiosClient.get<UserOut>(
       API_ROUTES.authentication.me(),
     );
     return response.data;
@@ -60,4 +38,3 @@ class Authentication {
 }
 
 export { Authentication };
-export type { LoginCredentials, AuthTokens, User };
