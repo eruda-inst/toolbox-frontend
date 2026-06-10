@@ -12,6 +12,7 @@ if (ENV_BASE_API_URL) {
 
 const API_ENDPOINT_BASES = {
   authentication: `${BASE_API_URL}/api/v1/autenticacao`,
+  perm: `${BASE_API_URL}/api/v1/permissoes`,
 };
 
 const API_ROUTES = {
@@ -20,6 +21,12 @@ const API_ROUTES = {
     refreshToken: () => `${API_ENDPOINT_BASES.authentication}/login`,
     logout: () => `${API_ENDPOINT_BASES.authentication}/logout`,
     me: () => `${API_ENDPOINT_BASES.authentication}/mim`,
+  },
+  perm: {
+    getByUserId: (id: number) => `${API_ENDPOINT_BASES.perm}/usuario/id/${id}`,
+    getByGroupId: (id: number) => `${API_ENDPOINT_BASES.perm}/grupo/id/${id}`,
+    getByGroupName: (name: string) =>
+      `${API_ENDPOINT_BASES.perm}/grupo/nome/${name}`,
   },
 };
 
