@@ -49,7 +49,7 @@ function Login() {
       if (res) {
         const { access_token, refresh_token } = res;
         tokenStorage.setTokens(access_token, refresh_token);
-        router.push("/");
+        router.replace("/");
       }
     } catch (e: unknown) {
       setCreds({ email: "", senha: "" });
