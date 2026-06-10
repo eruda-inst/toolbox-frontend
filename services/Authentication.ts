@@ -3,6 +3,8 @@ import { API_ROUTES } from "@/configs/api.config";
 import { tokenStorage } from "@/libs/tokenStorage.lib";
 import { CredIn, TokenOut } from "@/types/authentication.type";
 import { UserOut } from "@/types/user.type";
+import { usePermStore } from "@/stores/perm.store";
+import { useAuthenticationStore } from "@/stores/authentication.store";
 
 class Authentication {
   public static async login(credentials: CredIn): Promise<TokenOut> {
@@ -22,6 +24,8 @@ class Authentication {
       });
     } finally {
       tokenStorage.clearTokens();
+      useAuthenticationStore.getState().clearUser();
+      usePermStore.getState().clearPerms();
     }
   }
 
@@ -30,10 +34,6 @@ class Authentication {
       API_ROUTES.authentication.me(),
     );
     return response.data;
-  }
-
-  public static isAuthenticated(): boolean {
-    return !!tokenStorage.getAccessToken();
   }
 }
 
