@@ -4,7 +4,7 @@ import Providers from "@/app/providers";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
-  title: "Toolbox",
+  title: "Toolbox · Página não encontrada",
   description:
     "Plataforma de centralização de ferramentas utilizadas na Newnet",
 };
