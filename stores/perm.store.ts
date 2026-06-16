@@ -3,7 +3,7 @@ import { PermOut } from "@/types/perm.type";
 import { Perm } from "@/services/Perm";
 import { useAuthenticationStore } from "@/stores/authentication.store";
 
-interface PermState {
+interface PermStore {
   perms: PermOut[];
   isLoading: boolean;
   loaded: boolean;
@@ -12,7 +12,7 @@ interface PermState {
   clearPerms: () => void;
 }
 
-export const usePermStore = create<PermState>((set, get) => ({
+export const usePermStore = create<PermStore>((set, get) => ({
   perms: [],
   isLoading: false,
   loaded: false,
