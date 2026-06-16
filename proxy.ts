@@ -1,7 +1,12 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const publicRoutes = ["/login"];
+const publicRoutes = [
+  "/login",
+  "/login/esqueci-minha-senha",
+  "/login/esqueci-minha-senha/verificar-codigo",
+  "/login/esqueci-minha-senha/redefinir-senha",
+];
 
 export default async function proxy(request: NextRequest) {
   const url = request.nextUrl;
