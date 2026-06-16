@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import {
   Button,
   Card,
@@ -12,6 +12,7 @@ import {
   Input,
   InputGroup,
   Label,
+  Link as LinkHeroUI,
   Separator,
   TextField,
   toast,
@@ -32,7 +33,7 @@ function Login() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [creds, setCreds] = useState<CredIn>({ email: "", senha: "" });
 
-  const isValidCreds = useMemo(() => {
+  const isValidForm = useMemo(() => {
     const result = credInSchema.safeParse(creds);
     return result.success;
   }, [creds]);
@@ -41,7 +42,7 @@ function Login() {
     setCreds({ ...creds, [key]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
@@ -75,11 +76,11 @@ function Login() {
             toolbox
           </Typography>
 
-          <Card.Title className="text-2xl mb-2">
+          <Card.Title className="text-2xl mb-2 text-center">
             Bem-vindo ao toolbox
           </Card.Title>
 
-          <Card.Description>
+          <Card.Description className="text-center">
             Faça login para acessar sua plataforma
           </Card.Description>
         </Card.Header>
@@ -87,6 +88,7 @@ function Login() {
         <Card.Content className="space-y-4 mt-4">
           <Form className="space-y-4" onSubmit={handleSubmit}>
             <TextField
+              isRequired
               className="space-y-1"
               type="email"
               value={creds.email}
@@ -109,6 +111,7 @@ function Login() {
             </TextField>
 
             <TextField
+              isRequired
               className="space-y-1"
               type={isVisible ? "text" : "password"}
               value={creds.senha}
@@ -146,7 +149,7 @@ function Login() {
               <FieldError />
             </TextField>
 
-            <Link href="forgot-password">
+            <Link href="/login/esqueci-minha-senha" replace>
               <Typography
                 type="body-xs"
                 color="muted"
@@ -159,8 +162,9 @@ function Login() {
 
             <Button
               type="submit"
-              className="w-full mt-4"
-              isDisabled={!isValidCreds}
+              className="mt-4"
+              fullWidth
+              isDisabled={!isValidForm}
               isPending={isSubmitting}
             >
               {({ isPending }) => <>{isPending ? "Entrando..." : "Entrar"}</>}
@@ -177,7 +181,7 @@ function Login() {
               className="size-1.5 shadow-[0_0_6px_rgba(74,222,128,.3)]"
             />
             <Typography type="body-xs" color="muted">
-              Acesso restrito a colaboradores autorizados.
+              Acesso restrito a colaboradores autorizados
             </Typography>
           </div>
         </Card.Footer>
