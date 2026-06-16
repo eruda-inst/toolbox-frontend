@@ -2,14 +2,14 @@ import { create } from "zustand";
 import { UserOut } from "@/types/user.type";
 import { Authentication } from "@/services/Authentication";
 
-interface AuthenticationState {
+interface AuthenticationStore {
   user: UserOut | null;
   isLoading: boolean;
   loadUser: () => Promise<void>;
   clearUser: () => void;
 }
 
-const useAuthenticationStore = create<AuthenticationState>((set) => ({
+const useAuthenticationStore = create<AuthenticationStore>((set) => ({
   user: null,
   isLoading: false,
   loadUser: async () => {
